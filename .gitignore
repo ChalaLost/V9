@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/V9AgentInfo/bin/Debug/net5.0
+/V9AgentInfo/obj
+/V9AgentInfo/Properties
+/V9AgentInfo/V9AgentInfo.csproj.user
+/V9Common/bin/Debug/net5.0
+/V9Common/obj
+/V9Connect_Dev/obj
+/V9Connect_Dev/Properties
+/V9ManagerIVR/bin/Debug/net5.0
+/V9ManagerIVR/obj
+/V9ManagerIVR/Properties
+/V9ManagerIVR/V9ManagerIVR.csproj.user

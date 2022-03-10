@@ -1,0 +1,57 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Notify/AgentNotify/GetAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44361
+        }
+      ],
+      "UpstreamPathTemplate": "/api/test",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Info/AgentInfo/GetById/{InforId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44361
+        }
+      ],
+      "UpstreamPathTemplate": "/api/testid/{InforId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Info/AgentInfo/Create",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44361
+        }
+      ],
+      "UpstreamPathTemplate": "/api/testlol",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+    /*,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "FileCacheOptions": { "TtlSeconds": 30 }*/
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5021"
+  }
+}

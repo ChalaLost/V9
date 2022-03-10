@@ -1,0 +1,42 @@
+﻿@model IEnumerable<V9AgentInfo.Models.Entities.Notify>
+
+@{
+    ViewData["Title"] = "Get";
+}
+
+<h1>Get</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="notifyList">
+    </tbody>
+</table>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script>
+
+    "use strict";
+    let $notifyList = $("#notifyList");
+    var connection = new signalR.HubConnectionBuilder().withUrl("/signalr").build();
+    connection.on(
+        document.getElementById("notifyList").appendChild(div);
+    );
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>
