@@ -1,0 +1,68 @@
+﻿@model IEnumerable<V9AgentInfo.Models.Entities.Info>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Extension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OutboundDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outbound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inbound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoAnser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallPPX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Module)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="logBody">
+    </tbody>
+</table>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/List.js"></script>

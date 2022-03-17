@@ -5,15 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using V9AgentInfo.DataAccess.EF;
 using V9AgentInfo.Hubs;
 
@@ -58,16 +54,6 @@ namespace V9AgentInfo
                     .WithOrigins("http://localhost:19401");
             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            /*services.AddControllers()
-                .AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.WriteIndented = true;
-                options.JsonSerializerOptions.Converters.Add(new CustomJsonConverterForType());
-            }); ;*/
-            /*services.AddControllersWithViews()
-                    .AddNewtonsoftJson(options =>
-                                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);*/
 
             services.AddSignalR(cfg => cfg.EnableDetailedErrors = true);
             services.AddSwaggerGen(c =>
@@ -75,10 +61,12 @@ namespace V9AgentInfo
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "V9AgentInfo", Version = "v1" });
             });
             services.AddEFConfiguration(Configuration);
+
             var setting = new ConnectionSettings();
             services.AddSingleton<IElasticClient>(new ElasticClient(setting));
-
-
+            services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<ISendEndpointProvider>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
 
         }
 
@@ -93,12 +81,17 @@ namespace V9AgentInfo
             }
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("CorsPolicy");
+            app.UseCors(x => x
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .SetIsOriginAllowed(origin => true)
+           .AllowCredentials());
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<NotificationHub>("/signalr");
+                endpoints.MapHub<SignalR>("/signalr");
                 endpoints.MapControllers();
             });
         }
