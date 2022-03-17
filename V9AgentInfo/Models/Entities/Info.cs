@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using V9AgentInfo.Models.Entities.AgentInfo;
-using V9MAgentInfo.Models.Entities;
 
 namespace V9AgentInfo.Models.Entities
 {

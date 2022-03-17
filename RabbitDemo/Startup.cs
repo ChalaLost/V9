@@ -2,16 +2,12 @@ using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RabbitDemo.Consumer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RabbitDemo
 {
@@ -24,13 +20,13 @@ namespace RabbitDemo
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+       
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMassTransit(x =>
+            /*services.AddMassTransit(x =>
             {
-                x.AddConsumer<OrderConsumer>();
-                x.AddConsumer<OrderConsumer1>();
+                
+                x.AddConsumer<InfoReceivedConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cur =>
                 {
                     cur.UseHealthCheck(provider);
@@ -39,19 +35,34 @@ namespace RabbitDemo
                         h.Username("guest");
                         h.Password("guest");
                     });
-                    cur.ReceiveEndpoint("orderQueue", oq =>
+                    cur.ReceiveEndpoint("CreateInfo", oq =>
                     {
                         oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<OrderConsumer>(provider);
+                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
                     });
-                    cur.ReceiveEndpoint("orderQueue1", oq =>
+                    cur.ReceiveEndpoint("GetIdInfo", oq =>
                     {
                         oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<OrderConsumer1>(provider);
+                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                    });
+                    cur.ReceiveEndpoint("GetAllInfo", oq =>
+                    {
+                        oq.UseMessageRetry(r => r.Interval(2, 100));
+                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                    });
+                    cur.ReceiveEndpoint("UpdateContactInfo", oq =>
+                    {
+                        oq.UseMessageRetry(r => r.Interval(2, 100));
+                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                    });
+                    cur.ReceiveEndpoint("DeleteInfo", oq =>
+                    {
+                        oq.UseMessageRetry(r => r.Interval(2, 100));
+                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
                     });
                 }));
-            });
-            services.AddMassTransitHostedService();
+            });*/
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -59,7 +70,7 @@ namespace RabbitDemo
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -71,7 +82,7 @@ namespace RabbitDemo
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
