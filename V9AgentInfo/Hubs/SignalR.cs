@@ -8,12 +8,9 @@ using V9AgentInfo.Models.Entities;
 
 namespace V9AgentInfo.Hubs
 {
-    public class SignalR : Hub/*<ISignalR>*/
+    public class SignalR : Hub
     {
-        /*public async Task ListInfo(Info item)
-        {
-            await Clients.All.SendAsync("NewList", item);
-        }*/
+        
         public async Task ListInfo(ConsumeContext<InfoDemo> obj)
         {
             await Clients.All.SendAsync("NewList", obj);

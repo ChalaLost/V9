@@ -207,3 +207,8 @@ F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\Microsoft.Owin.S
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\Owin.dll
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\libman.json
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityModel.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.AspNetIdentity.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.Storage.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll

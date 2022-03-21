@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.0" />
     <PackageReference Include="MassTransit" Version="5.5.6" />
     <PackageReference Include="MassTransit.AspNetCore" Version="5.5.6" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.6" />

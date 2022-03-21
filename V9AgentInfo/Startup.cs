@@ -24,7 +24,6 @@ namespace V9AgentInfo
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
@@ -54,7 +53,6 @@ namespace V9AgentInfo
                     .WithOrigins("http://localhost:19401");
             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddSignalR(cfg => cfg.EnableDetailedErrors = true);
             services.AddSwaggerGen(c =>
             {
@@ -81,11 +79,11 @@ namespace V9AgentInfo
             }
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(x => x
-           .AllowAnyMethod()
-           .AllowAnyHeader()
-           .SetIsOriginAllowed(origin => true)
-           .AllowCredentials());
+            /*app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());*/
             
             app.UseAuthorization();
 

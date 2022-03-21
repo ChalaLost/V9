@@ -82,10 +82,10 @@ namespace V9AgentInfo.Controllers
             try
             {
                 var item = await _InfoServices.GetAll();
-                Uri uri = new Uri("rabbitmq://localhost/GetAllInfo");
+                //topic exchange
+                Uri uri = new Uri("rabbitmq://localhost/GetAll_Info");
                 var endPoint = await _busService.GetSendEndpoint(uri);
                 await endPoint.Send(new InfoDemo { data = item });
-                /*await _hub.Clients.All.SendAsync("NewList", item);*/
                 return Ok(item);
             }
             catch (Exception e)
@@ -93,6 +93,22 @@ namespace V9AgentInfo.Controllers
                 return BadRequest(e);
                 throw;
             }
+            /*var ttl = new Dictionary<string, object>
+            {
+                {"x-message-ttl", 30000 }
+            };
+            channel.ExchangeDeclare("demo-topic-exchange", ExchangeType.Topic, arguments: ttl);
+            var count = 0;
+
+            while (true)
+            {
+                var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+
+                channel.BasicPublish("demo-topic-exchange", "user.update", null, body);
+                count++;
+                Thread.Sleep(1000);
+            }*/
         }
         [HttpPut("UpdateContact/{InfoId}")]
         public async Task<IActionResult> UpdateContact(Guid InfoId, [FromBody] UpdateContactInfoModel model)

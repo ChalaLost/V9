@@ -10,6 +10,7 @@ using GreenPipes;
 using V9AgentInfo.Services;
 using V9AgentInfo.DataAccess.EF;
 using V9AgentInfo.Hubs;
+using RabbitMQ.Client;
 
 namespace Client
 {
@@ -21,8 +22,6 @@ namespace Client
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMassTransit(x =>
@@ -38,30 +37,65 @@ namespace Client
                         h.Username("guest");
                         h.Password("guest");
                     });
-                    cur.ReceiveEndpoint("CreateInfo", oq =>
+                    var host = cur.Host(new Uri("rabbitmq://localhost"), h =>
                     {
-                        oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        h.Username("guest");
+                        h.Password("guest");
                     });
-                    cur.ReceiveEndpoint("GetIdInfo", oq =>
+                    cur.ReceiveEndpoint(host, "CreateInfo", e =>
                     {
-                        oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.BindMessageExchanges = false;
+                        e.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.Bind("Agent_Info", x =>
+                        {
+                            x.ExchangeType = ExchangeType.Topic;
+                            x.RoutingKey = "info.topic.create";
+                        });
                     });
-                    cur.ReceiveEndpoint("GetAllInfo", oq =>
+                    cur.ReceiveEndpoint(host,"GetIdInfo", e =>
                     {
-                        oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<InfoReceivedConsumerList>(provider);
+                        e.BindMessageExchanges = false;
+                        e.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.Bind("Agent_Info", x =>
+                        {
+                            x.ExchangeType = ExchangeType.Topic;
+                            x.RoutingKey = "info.topic.getId";
+                        });
                     });
-                    cur.ReceiveEndpoint("UpdateContactInfo", oq =>
+                   /* cur.ReceiveEndpoint("GetAllInfo", oq =>
                     {
                         oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        oq.Consumer<InfoReceivedConsumerList>(provider);
+                    });*/
+                   cur.ReceiveEndpoint(host, "GetAll_Info", e =>
+                    {
+                        e.BindMessageExchanges = false;
+                        e.ConfigureConsumer<InfoReceivedConsumerList>(provider);
+                        e.Bind("Agent_Info", x =>
+                        {
+                            x.ExchangeType = ExchangeType.Topic;
+                            x.RoutingKey = "info.topic.getall";
+                        });
                     });
-                    cur.ReceiveEndpoint("DeleteInfo", oq =>
+                    cur.ReceiveEndpoint(host, "UpdateContactInfo", e =>
                     {
-                        oq.UseMessageRetry(r => r.Interval(2, 100));
-                        oq.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.BindMessageExchanges = false;
+                        e.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.Bind("Agent_Info", x =>
+                        {
+                            x.ExchangeType = ExchangeType.Topic;
+                            x.RoutingKey = "info.topic.updateContact";
+                        });
+                    });
+                    cur.ReceiveEndpoint(host, "DeleteInfo", e =>
+                    {
+                        e.BindMessageExchanges = false;
+                        e.ConfigureConsumer<InfoReceivedConsumer>(provider);
+                        e.Bind("Agent_Info", x =>
+                        {
+                            x.ExchangeType = ExchangeType.Topic;
+                            x.RoutingKey = "info.topic.delete";
+                        });
                     });
                 }));
             });
