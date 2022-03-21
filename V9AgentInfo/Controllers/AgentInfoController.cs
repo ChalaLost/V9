@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -6,33 +7,39 @@ using Microsoft.Extensions.Logging;
 using Nest;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using V9AgentInfo.Hubs;
 using V9AgentInfo.Models.Entities;
 using V9AgentInfo.Models.Entities.AgentInfo;
+using V9AgentInfo.Models.Entities.CRM;
 using V9AgentInfo.Services;
 
 namespace V9AgentInfo.Controllers
 {
     [ApiController]
     [Route("api/Info/[controller]")]
+    [Authorize]
+    [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.Unauthorized)]
+    /*[ApiVersion("3.0")]
+    [Route("api/{v:apiVersion}/AgentInfo")]*/
     public class AgentInfoController : Controller
     {
         private readonly IInfoServices _InfoServices;
         private readonly ILogger<AgentInfoController> _logger;
         private readonly IBus _busService;
         private readonly V9Context _Context;
-        private readonly IElasticClient _elasticClient;
-        private readonly IHubContext<SignalR> _hub;
+        /*private readonly IElasticClient _elasticClient;
+        private readonly IHubContext<SignalR> _hub;*/
 
         public AgentInfoController(IInfoServices InfoServices, ILogger<AgentInfoController> logger, IBus busService, IElasticClient elasticClient, V9Context Context, IHubContext<SignalR> hub)
         {
             _busService = busService;
             _logger = logger;
             _InfoServices = InfoServices;
-            _elasticClient = elasticClient;
+            /*_elasticClient = elasticClient;*/
             _Context = Context;
-            _hub = hub;
+            /*_hub = hub;*/
         }
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateInfoModel model)
@@ -93,22 +100,7 @@ namespace V9AgentInfo.Controllers
                 return BadRequest(e);
                 throw;
             }
-            /*var ttl = new Dictionary<string, object>
-            {
-                {"x-message-ttl", 30000 }
-            };
-            channel.ExchangeDeclare("demo-topic-exchange", ExchangeType.Topic, arguments: ttl);
-            var count = 0;
-
-            while (true)
-            {
-                var message = new { Name = "Producer", Message = $"Hello! Count: {count}" };
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-
-                channel.BasicPublish("demo-topic-exchange", "user.update", null, body);
-                count++;
-                Thread.Sleep(1000);
-            }*/
+        
         }
         [HttpPut("UpdateContact/{InfoId}")]
         public async Task<IActionResult> UpdateContact(Guid InfoId, [FromBody] UpdateContactInfoModel model)
@@ -150,6 +142,24 @@ namespace V9AgentInfo.Controllers
                 _logger.LogError(ex, ex.Message);
                 return StatusCode(500);
             }
+        }
+        [HttpPost("authenticate")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Authenticate([FromBody] LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var resultToken = await _InfoServices.Authenticate(model);
+
+            if (string.IsNullOrEmpty(resultToken))
+            {
+                return BadRequest(resultToken);
+            }
+
+            return Ok(resultToken);
         }
     }
 }

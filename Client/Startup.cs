@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -99,9 +99,15 @@ namespace Client
                     });
                 }));
             });
+
+
+
             services.AddMassTransitHostedService();
             services.AddTransient<IInfoServices, Infoservices>();
             services.AddEFConfiguration(Configuration);
+            
+
+
             services.AddCors(option => option.AddPolicy("CorsPolicy", builder =>
             {
                 builder

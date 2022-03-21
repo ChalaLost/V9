@@ -212,3 +212,6 @@ F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.AspNetIdentity.dll
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\IdentityServer4.Storage.dll
 F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\V9Common.dll
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\V9Common.pdb
+F:\OneDrive\Desktop\v9-connect-dev-main\Client\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
