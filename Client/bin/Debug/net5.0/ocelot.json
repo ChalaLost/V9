@@ -1,0 +1,193 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/role/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/role/{everything}",
+      "DownstreamPort": 8895,
+      "ServiceName": "v9role",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "UserId": "Claims[UserId] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/voice/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/voice/{everything}",
+      "DownstreamPort": 8896,
+      "ServiceName": "v9voice",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "UserId": "Claims[UserId] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/support/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/support/{everything}",
+      "DownstreamPort": 8889,
+      "ServiceName": "v9support",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ivr/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/ivr/{everything}",
+      "DownstreamPort": 8897,
+      "ServiceName": "v9managerivr",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/customer/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/customer/{everything}",
+      "DownstreamPort": 8898,
+      "ServiceName": "v9customer",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/report/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/report/{everything}",
+      "DownstreamPort": 8894,
+      "ServiceName": "v9report",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/agentinfo/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/agentinfo/{everything}",
+      "DownstreamPort": 8885,
+      "ServiceName": "v9agentinfo",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "api2022voicekey",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "default-account"
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[UserName] > value[0] > |",
+        "Company": "Claims[Company] > value[0] > |",
+        "Subdomain": "Claims[Subdomain] > value[0] > |",
+        "Permissions": "Claims[Permissions] > value[0] > |"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "ServiceDiscoveryProvider": { "Type": "Eureka" }
+  }
+}

@@ -52,40 +52,6 @@ namespace V9AgentInfo.Services
             {
                 new Claim(ClaimTypes.Name, model.UserName)
             };
-            /*var tokenHandler = new JwtSecurityTokenHandler();
-            var certificateText =
-        "-----BEGIN CERTIFICATE-----\n" +
-        "MIIBljCCAUACCQCIDMpqK7WfWDANBgkqhkiG9w0BAQsFADBSMQswCQYDVQQGEwJV\n" +
-        "UzETMBEGA1UECAwKU29tZS1TdGF0ZTESMBAGA1UECgwJTHV4b3R0aWNhMRowGAYD\n" +
-        "VQQLDBFMdXhvdHRpY2EgZXllY2FyZTAeFw0xODA1MjMxNTE1MjdaFw0yODA1MjAx\n" +
-        "NTE1MjdaMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApTb21lLVN0YXRlMRIwEAYD\n" +
-        "VQQKDAlMdXhvdHRpY2ExGjAYBgNVBAsMEUx1eG90dGljYSBleWVjYXJlMFwwDQYJ\n" +
-        "KoZIhvcNAQEBBQADSwAwSAJBAKuMYcirPj81WBtMituJJenF0CG/HYLcAUOtWKl1\n" +
-        "HchC0dM8VRRBI/HV+nZcweXzpjhX8ySa9s7kJneP0cuJiU8CAwEAATANBgkqhkiG\n" +
-        "9w0BAQsFAANBAKEM8wQwlqKgkfqnNFcbsZM0RUxS+eWR9LvycGuMN7aL9M6GOmfp\n" +
-        "QmF4MH4uvkaiZenqCkhDkyi4Cy81tz453tQ=\n" +
-        "-----END CERTIFICATE-----";
-
-            var key = Encoding.ASCII.GetBytes(certificateText);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                }),
-
-                Expires = DateTime.Now.AddHours(Convert.ToDouble(_UserTokenSetting.Expires)),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            UserTokenDTO userToken = new()
-            {
-                Id = user.Id.ToString(),
-                Accesstoken = tokenHandler.WriteToken(token),
-                ExpiredAt = tokenDescriptor.Expires,
-                Username = user.UserName
-            };
-            return "userToken"; */
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

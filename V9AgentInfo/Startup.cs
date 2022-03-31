@@ -1,7 +1,5 @@
 ﻿using MassTransit;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +27,7 @@ namespace V9AgentInfo
 
         public IConfiguration Configuration { get; }
 
-        [Obsolete]
+        [System.Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMassTransit(x =>
@@ -138,11 +136,12 @@ namespace V9AgentInfo
             app.UseHttpsRedirection();
             app.UseRouting();
             // nếu gọi signalr qua 2 prj thì dùng
-            /*app.UseCors(x => x
+            app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(origin => true)
-                .AllowCredentials());*/
+                .AllowCredentials());
+            
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -1,8 +1,8 @@
 ﻿"use strict"
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/signalr").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/signalr").build();
 
-connection.on("NewList", function (obj) {
+connection.on("NewMessage", function (obj) {
     console.log(obj)
 });
 

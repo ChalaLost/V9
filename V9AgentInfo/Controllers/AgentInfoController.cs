@@ -29,17 +29,14 @@ namespace V9AgentInfo.Controllers
         private readonly ILogger<AgentInfoController> _logger;
         private readonly IBus _busService;
         private readonly V9Context _Context;
-        /*private readonly IElasticClient _elasticClient;
-        private readonly IHubContext<SignalR> _hub;*/
 
         public AgentInfoController(IInfoServices InfoServices, ILogger<AgentInfoController> logger, IBus busService, IElasticClient elasticClient, V9Context Context, IHubContext<SignalR> hub)
         {
             _busService = busService;
             _logger = logger;
             _InfoServices = InfoServices;
-            /*_elasticClient = elasticClient;*/
             _Context = Context;
-            /*_hub = hub;*/
+            
         }
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateInfoModel model)
