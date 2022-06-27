@@ -4,22 +4,16 @@ using ChatSignalRR.DataAccess.EF;
 using ChatSignalRR.IndentityServer;
 using ChatSignalRR.Models;
 using ChatSignalRR.Services;
-using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 
 namespace ChatSignalRR
@@ -50,7 +44,7 @@ namespace ChatSignalRR
 
             }) 
           .AddInMemoryApiResources(Config.Apis) // bên folder IdentityServer thêm Config
-                                                // .AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
+          .AddInMemoryClients(Configuration.GetSection("IdentityServer:Clients"))
           .AddInMemoryClients(Config.Clients) // lấy ra các client
           .AddInMemoryIdentityResources(Config.Ids)
 

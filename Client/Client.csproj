@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.5.6" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="5.5.6" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.6" />
     <PackageReference Include="Microsoft.AspNet.Cors" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.2.2" />
@@ -13,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNet.SignalR.Owin" Version="1.2.0" />
     <PackageReference Include="Microsoft.AspNet.SignalR.SystemWeb" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,12 +24,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\code\v999\V9AgentInfo\V9AgentInfo.csproj" />
-    <ProjectReference Include="..\..\..\..\code\v999\V9Common\V9Common.csproj" />
-    <ProjectReference Include="..\..\..\..\code\v999\V9SignalRServer\V9SignalRServer.csproj" />
     <ProjectReference Include="..\V9AgentInfo\V9AgentInfo.csproj" />
   </ItemGroup>
 

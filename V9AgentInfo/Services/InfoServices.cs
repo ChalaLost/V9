@@ -12,7 +12,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using V9AgentInfo.Models.Config;
-using V9AgentInfo.Models.CRM;
 using V9AgentInfo.Models.Entities;
 using V9AgentInfo.Models.Entities.AgentInfo;
 using V9AgentInfo.Models.Entities.CRM;

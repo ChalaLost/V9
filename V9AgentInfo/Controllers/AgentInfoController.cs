@@ -121,15 +121,21 @@ namespace V9AgentInfo.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid Ids)
         {
+            string url = "rabbitmq://localhost/DeleteInfo";
+            return await test(Ids,url);
+        }
+
+        private async Task<IActionResult> test(dynamic item,string url)
+        {
             try
             {
-                var item = await _Context.Infos.FindAsync(Ids);
+              //  var item = await _Context.Infos.FindAsync(Ids);
                 if (item != null)
                 {
                     _Context.Infos.Remove(item);
                     await _Context.SaveChangesAsync();
                 }
-                Uri uri = new Uri("rabbitmq://localhost/DeleteInfo");
+                Uri uri = new Uri(url);
                 var endPoint = await _busService.GetSendEndpoint(uri);
                 await endPoint.Send(item);
                 return Ok();
@@ -140,6 +146,7 @@ namespace V9AgentInfo.Controllers
                 return StatusCode(500);
             }
         }
+
         [HttpPost("authenticate")]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody] LoginModel model)
