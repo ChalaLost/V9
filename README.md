@@ -1,3 +1,3 @@
 ChatApp with SignalR
 
-Client+Agent+Ocelot = Microserives
+Client+Agent+Ocelot = Microsevices
